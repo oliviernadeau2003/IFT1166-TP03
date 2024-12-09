@@ -1,5 +1,6 @@
 #include "../header/Epice.h"
 
+#include <iomanip> // Pour std::fixed et std::setprecision
 #include <iostream>
 
 using namespace std;
@@ -32,6 +33,14 @@ void Epice::setCategorie(const string &categorie) { this->categorie = categorie;
 // Afficher les informations de l'épice
 void Epice::afficher() const
 {
-    cout << "ID: " << this->id << ", Nom: " << this->nom << ", Type: " << this->type
-         << ", Prix: " << this->prix << ", Quantité: " << this->quantite << ", Catégorie: " << this->categorie << "\n";
+#include <iostream>
+#include <iomanip> // Pour std::fixed et std::setprecision
+
+    std::cout << "ID: " << this->id
+              << ", Nom: " << this->nom
+              << ", Type: " << this->type
+              << ", Prix: " << std::fixed << std::setprecision(2) << this->prix << "$"
+              << ", Quantité: " << this->quantite
+              << ", Catégorie: " << this->categorie
+              << "\n";
 }

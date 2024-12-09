@@ -25,7 +25,7 @@ void Fournisseur::setCourriel(string courriel) { this->courriel = courriel; }
 string Fournisseur::getTelephone() const { return this->telephone; }
 void Fournisseur::setTelephone(string telephone) { this->telephone = telephone; }
 
-void Fournisseur::afficher()
+void Fournisseur::afficher() const
 {
     cout << "ID: " << this->id << ", Nom: " << this->nom << ", Prénom: " << this->prenom << ", Courriel: " << this->courriel << ", Téléphone: " << this->telephone << "\n";
 }

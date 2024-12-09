@@ -35,7 +35,7 @@ public:
     void setTelephone(string telephone);
 
     // Afficher les informations du fournisseur
-    void afficher();
+    void afficher() const;
 };
 
 #endif // FOURNISSEUR_H
