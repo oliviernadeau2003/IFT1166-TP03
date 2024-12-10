@@ -25,13 +25,12 @@ int main()
 
     cout << "Données chargées avec succès.\n\n";
 
-    cout << "\nListe Epices :\n";
-    listeEpices.afficherTous([](const int &id, const Epice &epice)
-                             { epice.afficher(); });
+    Utils::afficherEpices(listeEpices);
 
-    cout << "\nListe Fournisseurs :\n";
-    listeFournisseurs.afficherTous([](const int &id, const Fournisseur &fournisseur)
-                                   { fournisseur.afficher(); });
+    // cout << "\nListe Fournisseurs :\n";
+    // listeFournisseurs.afficherTous([](const int &id, const Fournisseur &fournisseur)
+    //                                { fournisseur.afficher(); });
 
+    system("pause");
     return 0;
 }

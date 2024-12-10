@@ -74,4 +74,13 @@ namespace Utils
 
         fichier.close();
     }
+
+    void afficherEpices(GestionnaireMap<int, Epice> &listeEpices)
+    {
+        printf("===== LISTE DES ÉPICES =====\n");
+        printf("ID  | Nom           | Type      | Prix  | Quantité | Catégorie\n");
+        printf("---------------------------------------------------------------\n");
+        listeEpices.afficherTous([](const int &id, const Epice &epice)
+                                 { epice.afficher(); });
+    }
 };

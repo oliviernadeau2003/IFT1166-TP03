@@ -33,14 +33,6 @@ void Epice::setCategorie(const string &categorie) { this->categorie = categorie;
 // Afficher les informations de l'épice
 void Epice::afficher() const
 {
-#include <iostream>
-#include <iomanip> // Pour std::fixed et std::setprecision
-
-    std::cout << "ID: " << this->id
-              << ", Nom: " << this->nom
-              << ", Type: " << this->type
-              << ", Prix: " << std::fixed << std::setprecision(2) << this->prix << "$"
-              << ", Quantité: " << this->quantite
-              << ", Catégorie: " << this->categorie
-              << "\n";
+    //* c_string() converti l'objet en pointeur (Néccessaire lorsque printf est utilisé)
+    printf("%-3d | %-20s | %-9s | %-5.2f | %-8.2f | %-9s\n", this->id, this->nom.c_str(), this->type.c_str(), this->prix, this->quantite, this->categorie.c_str());
 }
