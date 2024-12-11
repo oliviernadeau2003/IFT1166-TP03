@@ -34,5 +34,5 @@ void Epice::setCategorie(const string &categorie) { this->categorie = categorie;
 void Epice::afficher() const
 {
     //* c_string() converti l'objet en pointeur (Néccessaire lorsque printf est utilisé)
-    printf("%-3d | %-20s | %-9s | %-5.2f | %-8.2f | %-9s\n", this->id, this->nom.c_str(), this->type.c_str(), this->prix, this->quantite, this->categorie.c_str());
+    printf("%-3d | %-15s | %-8s |  %-5.2f |  %-7.2f | %-s\n", this->id, this->nom.c_str(), this->type.c_str(), this->prix, this->quantite, this->categorie.c_str());
 }

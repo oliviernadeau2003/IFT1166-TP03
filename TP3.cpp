@@ -27,9 +27,8 @@ int main()
 
     Utils::afficherEpices(listeEpices);
 
-    // cout << "\nListe Fournisseurs :\n";
-    // listeFournisseurs.afficherTous([](const int &id, const Fournisseur &fournisseur)
-    //                                { fournisseur.afficher(); });
+    cout << "\n";
+    Utils::afficherFournisseurs(listeFournisseurs);
 
     system("pause");
     return 0;

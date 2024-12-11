@@ -1,7 +1,8 @@
-#include "../header/Fournisseur.h"
-
 #include <string>
 #include <iostream>
+
+#include "../header/Fournisseur.h"
+
 using namespace std;
 
 // Constructeurs
@@ -27,5 +28,6 @@ void Fournisseur::setTelephone(string telephone) { this->telephone = telephone; 
 
 void Fournisseur::afficher() const
 {
-    cout << "ID: " << this->id << ", Nom: " << this->nom << ", Prénom: " << this->prenom << ", Courriel: " << this->courriel << ", Téléphone: " << this->telephone << "\n";
+    printf("%-3d | %-12s | %-12s | %-28s | %-s\n", this->id, this->nom.c_str(), this->prenom.c_str(), this->courriel.c_str(), this->telephone.c_str());
+    // cout << "ID: " << this->id << ", Nom: " << this->nom << ", Prénom: " << this->prenom << ", Courriel: " << this->courriel << ", Téléphone: " << this->telephone << "\n";
 }

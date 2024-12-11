@@ -78,9 +78,18 @@ namespace Utils
     void afficherEpices(GestionnaireMap<int, Epice> &listeEpices)
     {
         printf("===== LISTE DES ÉPICES =====\n");
-        printf("ID  | Nom           | Type      | Prix  | Quantité | Catégorie\n");
-        printf("---------------------------------------------------------------\n");
+        printf(" ID | Nom             | Type     |  Prix  | Quantité | Catégorie\n");
+        printf("----------------------------------------------------------------\n");
         listeEpices.afficherTous([](const int &id, const Epice &epice)
                                  { epice.afficher(); });
+    }
+
+    void afficherFournisseurs(GestionnaireMap<int, Fournisseur> &listeFournisseurs)
+    {
+        printf("===== LISTE DES FOURNISSEURS =====\n");
+        printf(" ID | Nom          | Prénom       | Couriel                      | Téléphone\n");
+        printf("----------------------------------------------------------------------------\n");
+        listeFournisseurs.afficherTous([](const int &id, const Fournisseur &fournisseur)
+                                       { fournisseur.afficher(); });
     }
 };
