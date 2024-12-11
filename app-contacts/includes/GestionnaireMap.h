@@ -1,5 +1,5 @@
 // Avec les templates, les méthodes de la classe doivent effectivement être définies directement dans le fichier en-tête (.h).
-// Cela signifie que non seulement la déclaration, mais aussi les définitions des méthodes doivent être incluses 
+// Cela signifie que non seulement la déclaration, mais aussi les définitions des méthodes doivent être incluses
 // dans le même fichier.
 
 #ifndef GESTIONNAIRE_MAP_H
@@ -9,7 +9,7 @@
 #include <stdexcept>
 #include <functional>
 
-                                                using namespace std;
+using namespace std;
 
 // Classe générique pour gérer une map
 template <typename Cle, typename Valeur>

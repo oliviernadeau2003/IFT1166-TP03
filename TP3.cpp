@@ -44,7 +44,16 @@ int main()
 
     cout << "Données chargées avec succès.\n\n";
 
-    afficherMenu();
+    // afficherMenu();
+
+    try
+    {
+        Utils::afficherNbEpiceEtFournisseur(listeEpices, listeFournisseurs);
+    }
+    catch (const exception &e)
+    {
+        cerr << "Erreur : " << e.what() << endl;
+    }
 
     system("pause");
     return 0;
