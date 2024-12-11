@@ -9,6 +9,25 @@
 
 using namespace std;
 
+void afficherMenu()
+{
+    cout << "\n================= MENU PRINCIPAL =================" << endl;
+
+    cout << "1. Ajouter une nouvelle épice" << endl;
+    cout << "2. Afficher toutes les épices" << endl;
+    cout << "3. Supprimer une épice" << endl;
+    cout << "4. Rechercher un fournisseur par courriel" << endl;
+    cout << "5. Supprimer un fournisseur" << endl;
+    cout << "6. Afficher tous les fournisseurs" << endl;
+    cout << "7. Afficher le nombre total d’épices et de fournisseurs" << endl;
+    cout << "8. Afficher l’épice avec le prix le plus élevé" << endl;
+    cout << "9. Afficher la moyenne des prix des épices" << endl;
+    cout << "10. Quitter" << endl;
+
+    cout << "==================================================" << endl;
+    cout << "Entrez votre choix : ";
+}
+
 int main()
 {
     system("chcp 65001 > NUL"); // Set l'encodeur a UTF-8 pour lire et écrire des charactère spéciaux (... > NUL permet de 'suprimer' l'output de la commande)
@@ -25,11 +44,7 @@ int main()
 
     cout << "Données chargées avec succès.\n\n";
 
-    // cout << "\n";
-    // Utils::afficherEpices(listeEpices);
-
-    // cout << "\n";
-    // Utils::afficherFournisseurs(listeFournisseurs);
+    afficherMenu();
 
     system("pause");
     return 0;
