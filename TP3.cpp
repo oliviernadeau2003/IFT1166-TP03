@@ -25,10 +25,11 @@ int main()
 
     cout << "Données chargées avec succès.\n\n";
 
-    Utils::afficherEpices(listeEpices);
+    // cout << "\n";
+    // Utils::afficherEpices(listeEpices);
 
-    cout << "\n";
-    Utils::afficherFournisseurs(listeFournisseurs);
+    // cout << "\n";
+    // Utils::afficherFournisseurs(listeFournisseurs);
 
     system("pause");
     return 0;

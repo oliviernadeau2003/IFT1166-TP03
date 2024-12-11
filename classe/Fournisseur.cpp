@@ -26,8 +26,10 @@ void Fournisseur::setCourriel(string courriel) { this->courriel = courriel; }
 string Fournisseur::getTelephone() const { return this->telephone; }
 void Fournisseur::setTelephone(string telephone) { this->telephone = telephone; }
 
+// Afficher les informations du fournisseur
+//! Fix the use of special character
 void Fournisseur::afficher() const
 {
+    //* c_string() converti l'objet en pointeur (Néccessaire lorsque printf est utilisé)
     printf("%-3d | %-12s | %-12s | %-28s | %-s\n", this->id, this->nom.c_str(), this->prenom.c_str(), this->courriel.c_str(), this->telephone.c_str());
-    // cout << "ID: " << this->id << ", Nom: " << this->nom << ", Prénom: " << this->prenom << ", Courriel: " << this->courriel << ", Téléphone: " << this->telephone << "\n";
 }

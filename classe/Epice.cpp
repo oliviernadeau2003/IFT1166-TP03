@@ -31,6 +31,7 @@ string Epice::getCategorie() const { return this->categorie; }
 void Epice::setCategorie(const string &categorie) { this->categorie = categorie; }
 
 // Afficher les informations de l'épice
+//! Fix the use of special character
 void Epice::afficher() const
 {
     //* c_string() converti l'objet en pointeur (Néccessaire lorsque printf est utilisé)
