@@ -143,6 +143,30 @@ namespace Utils
         cout << "Épice supprimé avec succès !" << endl;
     }
 
+    // Afficher l'Épice avec le prix le plus élevé
+    void afficherEpicePrixMax(GestionnaireMap<int, Epice> &listeEpices)
+    {
+        // Comparateur pour trouver l'élément avec le prix maximum
+        function comparateur = [](const pair<int, Epice> &a, const pair<int, Epice> &b)
+        {
+            return a.second.getPrix() < b.second.getPrix(); // Compare les prix
+        };
+
+        try
+        {
+            int idEpice = listeEpices.trouverMax(comparateur);
+            Epice epicePrixMax = listeEpices.lire(idEpice);
+
+            cout << "L'épice avec le prix le plus élevé : " << endl;
+            afficherEnteteEpice();
+            epicePrixMax.afficher();
+        }
+        catch (const runtime_error &e)
+        {
+            cout << "Erreur : " << e.what() << endl;
+        }
+    }
+
     void afficherNbEpiceEtFournisseur(GestionnaireMap<int, Epice> &listeEpices, GestionnaireMap<int, Fournisseur> &listeFournisseurs)
     {
         cout << "Il y a " << listeEpices.taille() << " Épice(s)\n";

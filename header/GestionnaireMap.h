@@ -1,13 +1,10 @@
-// Avec les templates, les méthodes de la classe doivent effectivement être définies directement dans le fichier en-tête (.h).
-// Cela signifie que non seulement la déclaration, mais aussi les définitions des méthodes doivent être incluses
-// dans le même fichier.
-
 #ifndef GESTIONNAIRE_MAP_H
 #define GESTIONNAIRE_MAP_H
 
 #include <map>
 #include <stdexcept>
 #include <functional>
+#include <algorithm> // max_element function
 
 using namespace std;
 
@@ -62,6 +59,18 @@ public:
     size_t taille() const
     {
         return elements.size();
+    }
+
+    // Trouver max des élément du map basé sur un Comparator
+    template <typename Compare>
+    Cle trouverMax(Compare comparateur) const
+    {
+        if (elements.empty())
+            throw runtime_error("Map vide !");
+
+        // Utilise std::max_element avec le comparateur fourni
+        auto it = max_element(elements.begin(), elements.end(), comparateur);
+        return it->first; // Retourne la clé de l'élément avec la valeur maximale
     }
 };
 

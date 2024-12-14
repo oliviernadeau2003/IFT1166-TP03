@@ -48,7 +48,6 @@ int main()
 
     try
     {
-        Utils::afficherNbEpiceEtFournisseur(listeEpices, listeFournisseurs);
     }
     catch (const exception &e)
     {
