@@ -9,13 +9,13 @@
 
 namespace Utils
 {
+    // Fonction pour charger le fichier fournisseurs
     void chargerFichierFournisseur(const string &nomFichier, GestionnaireMap<int, Fournisseur> &listeFournisseurs)
     {
         ifstream fichier(nomFichier);
         if (!fichier)
         {
-            cerr << "Erreur : Ouverture du fichier '" << nomFichier << "' impossible." << endl;
-            return;
+            throw runtime_error("Impossible de lire le fichier " + nomFichier);
         }
 
         string ligne;
@@ -40,13 +40,13 @@ namespace Utils
         fichier.close();
     }
 
+    // Fonction pour charger le fichier epices
     void chargerFichierEpices(const string &nomFichier, GestionnaireMap<int, Epice> &listeEpices, GestionnaireMap<int, Fournisseur> &listeFournisseurs)
     {
         ifstream fichier(nomFichier);
         if (!fichier)
         {
-            cerr << "Erreur : Ouverture du fichier '" << nomFichier << "' impossible." << endl;
-            return;
+            throw runtime_error("Impossible de lire le fichier " + nomFichier);
         }
 
         string ligne;
@@ -75,6 +75,7 @@ namespace Utils
         fichier.close();
     }
 
+    // Afficher l'entete des epices
     void afficherEnteteEpice()
     {
         printf("===== LISTE DES ÉPICES =====\n");
@@ -82,6 +83,7 @@ namespace Utils
         printf("----------------------------------------------------------------\n");
     }
 
+    // Afficher tous les epices
     void afficherEpices(const GestionnaireMap<int, Epice> &listeEpices)
     {
         afficherEnteteEpice();
@@ -89,6 +91,7 @@ namespace Utils
                                  { epice.afficher(); });
     }
 
+    // Afficher l'entete des fournisseurs
     void afficherEnteteFournisseur()
     {
         printf("===== LISTE DES FOURNISSEURS =====\n");
@@ -96,6 +99,7 @@ namespace Utils
         printf("----------------------------------------------------------------------------\n");
     }
 
+    // Afficher tous les fournisseurs
     void afficherFournisseurs(const GestionnaireMap<int, Fournisseur> &listeFournisseurs)
     {
         afficherEnteteFournisseur();
@@ -128,8 +132,15 @@ namespace Utils
         cout << "Catégorie : ";
         getline(cin, categorie);
 
-        listeEpices.ajouter(id, Epice(id, nom, type, prix, quantite, categorie));
-        cout << "Épice ajouté avec succès !" << endl;
+        try
+        {
+            listeEpices.ajouter(id, Epice(id, nom, type, prix, quantite, categorie));
+            cout << "Épice ajouté avec succès !" << endl;
+        }
+        catch (const std::exception &e)
+        {
+            std::cerr << e.what() << '\n';
+        }
     }
 
     // Suprimer une Épice
@@ -139,8 +150,15 @@ namespace Utils
         cout << "ID de l'épice à supprimer : ";
         cin >> id;
 
-        listeEpices.supprimer(id);
-        cout << "Épice supprimé avec succès !" << endl;
+        try
+        {
+            listeEpices.supprimer(id);
+            cout << "Épice supprimé avec succès !" << endl;
+        }
+        catch (const std::exception &e)
+        {
+            std::cerr << e.what() << '\n';
+        }
     }
 
     // Afficher l'Épice avec le prix le plus élevé
@@ -167,10 +185,22 @@ namespace Utils
         }
     }
 
-    void afficherNbEpiceEtFournisseur(GestionnaireMap<int, Epice> &listeEpices, GestionnaireMap<int, Fournisseur> &listeFournisseurs)
+    void afficherPrixMoyenEpice(const GestionnaireMap<int, Epice> &listeEpices)
     {
-        cout << "Il y a " << listeEpices.taille() << " Épice(s)\n";
-        cout << "Il y a " << listeFournisseurs.taille() << " Fournisseur(s)\n";
+        if (listeEpices.taille() == 0)
+            throw runtime_error("Aucune épice dans la liste !");
+
+        // Convertir explicitement le lambda en std::function
+        function<double(const double &, const int &, const Epice &)> accumulateur =
+            [](const double &somme, const int &, const Epice &epice) -> double
+        {
+            return somme + epice.getPrix();
+        };
+
+        // Spécifiez explicitement le type attendu pour le lambda
+        double sommePrix = listeEpices.parcourirAvecAccumulateur(0.0, accumulateur);
+
+        printf("Le prix moyen des épices est de %.2f$\n", sommePrix / listeEpices.taille());
     }
 
     //* ---
@@ -195,8 +225,15 @@ namespace Utils
         cout << "Téléphone : ";
         getline(cin, telephone);
 
-        listeFournisseurs.ajouter(id, Fournisseur(id, nom, prenom, courriel, telephone));
-        cout << "Fournisseur ajouté avec succès !" << endl;
+        try
+        {
+            listeFournisseurs.ajouter(id, Fournisseur(id, nom, prenom, courriel, telephone));
+            cout << "Fournisseur ajouté avec succès !" << endl;
+        }
+        catch (const std::exception &e)
+        {
+            std::cerr << e.what() << '\n';
+        }
     }
 
     // Suprimer un Fournisseur
@@ -205,9 +242,15 @@ namespace Utils
         int id;
         cout << "ID du fournisseur à supprimer : ";
         cin >> id;
-
-        listeFournisseurs.supprimer(id);
-        cout << "Fournisseur supprimé avec succès !" << endl;
+        try
+        {
+            listeFournisseurs.supprimer(id);
+            cout << "Fournisseur supprimé avec succès !" << endl;
+        }
+        catch (const std::exception &e)
+        {
+            std::cerr << e.what() << '\n';
+        }
     }
 
     // Rechercher un fournisseur par courriel
@@ -215,7 +258,8 @@ namespace Utils
     {
         string courriel;
         cout << "Courriel : ";
-        getline(cin, courriel);
+        cin >> courriel;
+        // getline(cin, courriel);
 
         cout << "\nFournisseur(s) avec comme courriel : " << courriel << endl;
         Utils::afficherEnteteFournisseur();
@@ -227,5 +271,51 @@ namespace Utils
     }
 
     //* ---
+
+    //* Autres
+
+    void afficherNbEpiceEtFournisseur(GestionnaireMap<int, Epice> &listeEpices, GestionnaireMap<int, Fournisseur> &listeFournisseurs)
+    {
+        cout << "Il y a " << listeEpices.taille() << " Épice(s)\n";
+        cout << "Il y a " << listeFournisseurs.taille() << " Fournisseur(s)\n";
+    }
+
+    //* ---
+
+    // ******** BONUS ********
+
+    void ajouterRelationEpiceFournisseur(GestionnaireMap<int, Epice> &listeEpices, GestionnaireMap<int, Fournisseur> &listeFournisseurs)
+    {
+        int idEpice, idFournisseur;
+
+        cout << "Entrez l'ID de l'épice : ";
+        cin >> idEpice;
+        cout << "Entrez l'ID du fournisseur : ";
+        cin >> idFournisseur;
+
+        try
+        {
+            // Vérifier si l'épice et le fournisseur existent
+            Epice epice = listeEpices.lire(idEpice);
+            Fournisseur fournisseur = listeFournisseurs.lire(idFournisseur);
+
+            // Ajouter la relation dans les deux sens
+            listeEpices.ajouterRelation(idEpice, idFournisseur);
+            listeFournisseurs.ajouterRelation(idEpice, idFournisseur);
+
+            cout << "Relation ajoutée entre l'épice et le fournisseur." << endl;
+        }
+        catch (const runtime_error &e)
+        {
+            cout << "Erreur : " << e.what() << endl;
+        }
+    }
+
+    void afficherRelations(GestionnaireMap<int, Epice> &listeEpices)
+    {
+        listeEpices.afficherRelationEpicesFournisseurs();
+    }
+
+    // ***
 
 };

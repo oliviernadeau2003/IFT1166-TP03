@@ -39,23 +39,62 @@ int main()
     GestionnaireMap<int, Epice> listeEpices;
     GestionnaireMap<int, Fournisseur> listeFournisseurs;
 
-    Utils::chargerFichierFournisseur(PATHFICHIERFOURNISSEUR, listeFournisseurs);
-    Utils::chargerFichierEpices(PATHFICHIEREPICE, listeEpices, listeFournisseurs);
-
-    cout << "Données chargées avec succès.\n\n";
-
-    // afficherMenu();
-
     try
     {
+        // Charger les fichiers de données
+        Utils::chargerFichierFournisseur(PATHFICHIERFOURNISSEUR, listeFournisseurs);
+        Utils::chargerFichierEpices(PATHFICHIEREPICE, listeEpices, listeFournisseurs);
+        cout << "Données chargées avec succès.\n\n";
 
-        system("cls"); // Clear l'affichage
+        int choix;
+        while (choix != 10)
+        {
+            afficherMenu();
+            cin >> choix;
+            switch (choix)
+            {
+            case 1:
+                Utils::ajouterEpice(listeEpices);
+                break;
+            case 2:
+                Utils::afficherEpices(listeEpices);
+                break;
+            case 3:
+                Utils::supprimerEpice(listeEpices);
+                break;
+            case 4:
+                Utils::rechercherFournisseurParCourriel(listeFournisseurs);
+                break;
+            case 5:
+                Utils::supprimerFournisseur(listeFournisseurs);
+                break;
+            case 6:
+                Utils::afficherFournisseurs(listeFournisseurs);
+                break;
+            case 7:
+                Utils::afficherNbEpiceEtFournisseur(listeEpices, listeFournisseurs);
+                break;
+            case 8:
+                Utils::afficherEpicePrixMax(listeEpices);
+                break;
+            case 9:
+                Utils::afficherPrixMoyenEpice(listeEpices);
+                break;
+            case 10:
+                cout << "Au revoir !" << endl;
+                break;
+            default:
+                cout << "Choix invalide, veuillez réessayer." << endl;
+            }
+            system("pause");
+            system("cls"); // Clear l'affichage
+        }
     }
     catch (const exception &e)
     {
         cerr << "Erreur : " << e.what() << endl;
+        system("pause");
     }
 
-    system("pause");
     return 0;
 }

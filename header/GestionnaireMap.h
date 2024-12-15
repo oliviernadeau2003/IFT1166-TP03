@@ -2,6 +2,7 @@
 #define GESTIONNAIRE_MAP_H
 
 #include <map>
+#include <vector>
 #include <stdexcept>
 #include <functional>
 #include <algorithm> // max_element function
@@ -72,6 +73,57 @@ public:
         auto it = max_element(elements.begin(), elements.end(), comparateur);
         return it->first; // Retourne la clé de l'élément avec la valeur maximale
     }
+
+    template <typename Accumulateur>
+    Accumulateur parcourirAvecAccumulateur(Accumulateur valeurInitiale, function<Accumulateur(const Accumulateur &, const Cle &, const Valeur &)> operation) const
+    {
+        Accumulateur resultat = valeurInitiale;
+
+        for (const auto &pair : elements)
+        {
+            resultat = operation(resultat, pair.first, pair.second);
+        }
+
+        return resultat;
+    }
+
+    // ******** BONUS ********
+    map<int, vector<int>> relationEpiceFournisseur; // Cle: ID de l'épice, Valeur: Liste des IDs de fournisseurs
+    map<int, vector<int>> relationFournisseurEpice; // Cle: ID du fournisseur, Valeur: Liste des IDs d'épices
+
+    // Ajouter une relation entre un fournisseur et une épice
+    void ajouterRelation(int idEpice, int idFournisseur)
+    {
+        relationEpiceFournisseur[idEpice].push_back(idFournisseur);
+        relationFournisseurEpice[idFournisseur].push_back(idEpice);
+    }
+
+    // Afficher la relation entre les épices et leurs fournisseurs
+    void afficherRelationEpicesFournisseurs()
+    {
+        cout << "Relation entre les épices et leurs fournisseurs :\n";
+        for (const auto &pair : relationEpiceFournisseur)
+        {
+            cout << "Épice ID " << pair.first << " est fournie par : ";
+            for (int fournisseurId : pair.second)
+            {
+                cout << fournisseurId << " ";
+            }
+            cout << endl;
+        }
+
+        cout << "\nRelation entre les fournisseurs et les épices :\n";
+        for (const auto &pair : relationFournisseurEpice)
+        {
+            cout << "Fournisseur ID " << pair.first << " fournit : ";
+            for (int epiceId : pair.second)
+            {
+                cout << epiceId << " ";
+            }
+            cout << endl;
+        }
+    }
+    // ***
 };
 
 #endif
