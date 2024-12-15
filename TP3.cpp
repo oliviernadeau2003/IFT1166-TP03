@@ -48,6 +48,8 @@ int main()
 
     try
     {
+
+        system("cls"); // Clear l'affichage
     }
     catch (const exception &e)
     {

@@ -147,7 +147,7 @@ namespace Utils
     void afficherEpicePrixMax(GestionnaireMap<int, Epice> &listeEpices)
     {
         // Comparateur pour trouver l'élément avec le prix maximum
-        function comparateur = [](const pair<int, Epice> &a, const pair<int, Epice> &b)
+        auto comparateur = [](const pair<int, Epice> &a, const pair<int, Epice> &b)
         {
             return a.second.getPrix() < b.second.getPrix(); // Compare les prix
         };
