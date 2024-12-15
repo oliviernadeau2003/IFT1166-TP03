@@ -51,6 +51,20 @@ int main()
         {
             afficherMenu();
             cin >> choix;
+
+            while (cin.fail())
+            {
+                // Effacer l'état d'erreur
+                std::cin.clear();
+                // Ignorer le reste de l'entrée
+                std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+                cout << "Choix invalide, veuillez réessayer." << endl;
+                system("pause");
+                system("cls"); // Clear l'affichage
+                afficherMenu();
+                cin >> choix;
+            }
+
             switch (choix)
             {
             case 1:
