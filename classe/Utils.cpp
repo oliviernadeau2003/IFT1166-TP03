@@ -6,7 +6,6 @@
 
 #include "../header/Epice.h"
 #include "../header/Fournisseur.h"
-
 namespace Utils
 {
     // Fonction pour charger le fichier fournisseurs
